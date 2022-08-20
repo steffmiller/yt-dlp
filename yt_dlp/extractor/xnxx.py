@@ -73,6 +73,12 @@ class XNXXIE(InfoExtractor):
             r'id=["\']nb-views-number[^>]+>([\d,.]+)', webpage, 'view count',
             default=None))
 
+        tags_str = self._html_search_meta(
+            'keywords', webpage, 'tags')
+        tags = (
+            None if tags_str is None
+            else tags_str.split(','))
+
         return {
             'id': video_id,
             'title': title,
@@ -81,4 +87,5 @@ class XNXXIE(InfoExtractor):
             'view_count': view_count,
             'age_limit': 18,
             'formats': formats,
+            'tags': tags,
         }
